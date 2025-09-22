@@ -21,24 +21,40 @@ interface StyleSettings {
 export default function TaskChecklist() {
   const [tasks, setTasks] = useState<Task[]>([])
   const [newTask, setNewTask] = useState('')
-  const [styles, setStyles] = useState<StyleSettings>({
-    inputTextColor: '#000000',
-    inputBgColor: '#ffffff',
-    inputFontFamily: 'system-ui, sans-serif',
-    inputFontSize: '16px',
-    listTextColor: '#000000',
-    listBgColor: '#f3f4f6',
-    listFontFamily: 'system-ui, sans-serif',
-    listFontSize: '16px',
-    mainBgColor: '#ffffff',
-  })
+  const [styles, setStyles] = useState<StyleSettings>(() => {
+    // Load initial styles from localStorage
+    const savedStyles = localStorage.getItem('styleSettings');
+    if (savedStyles) {
+      return JSON.parse(savedStyles);
+    }
+    return {
+      inputTextColor: '#000000',
+      inputBgColor: '#ffffff',
+      inputFontFamily: 'system-ui, sans-serif',
+      inputFontSize: '16px',
+      listTextColor: '#000000',
+      listBgColor: '#f3f4f6',
+      listFontFamily: 'system-ui, sans-serif',
+      listFontSize: '16px',
+      mainBgColor: '#ffffff',
+    };
+  });
 
-  // Load tasks from localStorage on component mount
+  // Load tasks and styles from localStorage on component mount
   useEffect(() => {
     const savedTasks = localStorage.getItem('tasks')
     if (savedTasks) {
       setTasks(JSON.parse(savedTasks))
     }
+
+    // Listen for storage changes to update styles
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'styleSettings' && e.newValue) {
+        setStyles(JSON.parse(e.newValue));
+      }
+    };
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
   }, [])
 
   // Save tasks to localStorage whenever they change
