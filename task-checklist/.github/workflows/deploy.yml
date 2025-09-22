@@ -37,14 +37,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd task-checklist
           rm -rf node_modules
           rm -rf dist
           npm ci
 
       - name: Build
         run: |
-          cd task-checklist
           npm run build
 
       - name: Setup Pages
@@ -53,7 +51,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: './task-checklist/dist'
+          path: './dist'
 
       - name: Deploy to GitHub Pages
         id: deployment
