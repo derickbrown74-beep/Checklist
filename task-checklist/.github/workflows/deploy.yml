@@ -25,6 +25,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          clean: true
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -33,10 +36,12 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: cd task-checklist && npm ci
+        working-directory: ./task-checklist
+        run: npm ci
 
       - name: Build
-        run: cd task-checklist && npm run build
+        working-directory: ./task-checklist
+        run: npm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
