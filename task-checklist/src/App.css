@@ -5,6 +5,12 @@
   text-align: center;
 }
 
+/* Force input text color */
+input[type="text"] {
+  color: black !important;
+  -webkit-text-fill-color: black !important;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
