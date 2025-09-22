@@ -36,12 +36,14 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        working-directory: ./task-checklist
-        run: npm ci
+        run: |
+          cd task-checklist
+          npm ci
 
       - name: Build
-        working-directory: ./task-checklist
-        run: npm run build
+        run: |
+          cd task-checklist
+          npm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
@@ -49,10 +51,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: task-checklist/dist
+          path: ./task-checklist/dist
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
-        with:
-          token: ${{ github.token }}
