@@ -30,25 +30,24 @@ interface Props {
 }
 
 export default function StyleEditor({ onStyleChange }: Props) {
-  const [settings, setSettings] = useState<StyleSettings>({
-    inputTextColor: '#000000',
-    inputBgColor: '#ffffff',
-    inputFontFamily: 'system-ui, sans-serif',
-    inputFontSize: '16px',
-    listTextColor: '#000000',
-    listBgColor: '#f3f4f6',
-    listFontFamily: 'system-ui, sans-serif',
-    listFontSize: '16px',
-    mainBgColor: '#ffffff',
-  });
-
-  useEffect(() => {
-    // Load saved settings from localStorage
+  const [settings, setSettings] = useState<StyleSettings>(() => {
+    // Load initial settings from localStorage
     const savedSettings = localStorage.getItem('styleSettings');
     if (savedSettings) {
-      setSettings(JSON.parse(savedSettings));
+      return JSON.parse(savedSettings);
     }
-  }, []);
+    return {
+      inputTextColor: '#000000',
+      inputBgColor: '#ffffff',
+      inputFontFamily: 'system-ui, sans-serif',
+      inputFontSize: '16px',
+      listTextColor: '#000000',
+      listBgColor: '#f3f4f6',
+      listFontFamily: 'system-ui, sans-serif',
+      listFontSize: '16px',
+      mainBgColor: '#ffffff',
+    };
+  });
 
   useEffect(() => {
     // Save settings to localStorage and notify parent
