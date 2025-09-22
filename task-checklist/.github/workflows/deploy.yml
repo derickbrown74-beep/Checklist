@@ -33,17 +33,21 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'npm'
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-
 
       - name: Install dependencies
-        run: |
-          rm -rf node_modules
-          rm -rf dist
-          npm ci
+        run: npm ci
 
       - name: Build
-        run: |
-          npm run build
+        env:
+          CI: false
+        run: npm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
