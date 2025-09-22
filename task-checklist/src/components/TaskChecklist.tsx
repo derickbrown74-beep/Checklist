@@ -1,72 +1,42 @@
-import { useState, useEffect } from 'react'
-
-interface Task {
-  id: number
-  text: string
-  completed: boolean
-}
-
-interface StyleSettings {
-  inputTextColor: string;
-  inputBgColor: string;
-  inputFontFamily: string;
-  inputFontSize: string;
-  listTextColor: string;
-  listBgColor: string;
-  listFontFamily: string;
-  listFontSize: string;
-  mainBgColor: string;
-}
+import { useState } from 'react';
+import { StyleSettings, Task } from '../types';
 
 interface TaskChecklistProps {
   styles: StyleSettings;
+  tasks: Task[];
+  onTasksChange: (tasks: Task[]) => void;
 }
 
-export default function TaskChecklist({ styles }: TaskChecklistProps) {
-  const [tasks, setTasks] = useState<Task[]>(() => {
-    const savedTasks = localStorage.getItem('tasks');
-    return savedTasks ? JSON.parse(savedTasks) : [];
-  });
+export default function TaskChecklist({ styles, tasks, onTasksChange }: TaskChecklistProps) {
   const [newTask, setNewTask] = useState('');
-
-  // Load tasks from localStorage on component mount
-  useEffect(() => {
-    const savedTasks = localStorage.getItem('tasks')
-    if (savedTasks) {
-      setTasks(JSON.parse(savedTasks))
-    }
-
-    // Set up initial tasks
-  }, [])
-
-  // Save tasks to localStorage whenever they change
-  useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks))
-  }, [tasks])
 
   const addTask = () => {
     if (newTask.trim()) {
-      setTasks([
+      onTasksChange([
         ...tasks,
         {
           id: Date.now(),
           text: newTask.trim(),
           completed: false
         }
-      ])
-      setNewTask('')
+      ]);
+      setNewTask('');
     }
-  }
+  };
 
   const toggleTask = (id: number) => {
-    setTasks(tasks.map(task =>
+    onTasksChange(tasks.map(task =>
       task.id === id ? { ...task, completed: !task.completed } : task
-    ))
-  }
+    ));
+  };
 
   const deleteTask = (id: number) => {
-    setTasks(tasks.filter(task => task.id !== id))
-  }
+    onTasksChange(tasks.filter(task => task.id !== id));
+  };
+
+  const clearAllTasks = () => {
+    onTasksChange([]);
+  };
 
   return (
     <div 
@@ -97,10 +67,7 @@ export default function TaskChecklist({ styles }: TaskChecklistProps) {
           Add
         </button>
         <button
-          onClick={() => {
-            setTasks([]);
-            localStorage.setItem('tasks', '[]');
-          }}
+          onClick={clearAllTasks}
           className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 focus:outline-none"
         >
           Clear All

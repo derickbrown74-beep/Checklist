@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import TaskChecklist from './components/TaskChecklist';
+import ProfileTabs from './components/ProfileTabs';
 import StyleEditor from './components/StyleEditor';
 import './App.css';
 
@@ -62,7 +62,7 @@ export default function App() {
           {showEditor && <StyleEditor onStyleChange={(newStyles: StyleSettings) => {
             setStyles(newStyles);
           }} />}
-          <TaskChecklist styles={styles} />
+          <ProfileTabs styles={styles} />
         </div>
       </div>
     </div>
