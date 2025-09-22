@@ -65,8 +65,8 @@ export default function StyleEditor({ onStyleChange }: Props) {
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Input Field Styles */}
-        <div className="space-y-3">
-          <h3 className="font-semibold text-gray-700 dark:text-gray-200">Input Field</h3>
+        <div className="space-y-3 bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+          <h3 className="font-semibold text-gray-700 dark:text-gray-200">Input Field Styling</h3>
           
           <div className="space-y-2">
             <label className="block text-sm text-gray-600 dark:text-gray-300">Text Color</label>
@@ -116,8 +116,8 @@ export default function StyleEditor({ onStyleChange }: Props) {
         </div>
 
         {/* List Item Styles */}
-        <div className="space-y-3">
-          <h3 className="font-semibold text-gray-700 dark:text-gray-200">List Items</h3>
+        <div className="space-y-3 bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+          <h3 className="font-semibold text-gray-700 dark:text-gray-200">List Items Styling</h3>
           
           <div className="space-y-2">
             <label className="block text-sm text-gray-600 dark:text-gray-300">Text Color</label>
