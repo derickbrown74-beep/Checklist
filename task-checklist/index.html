@@ -7,20 +7,10 @@
     <title>Task Checklist</title>
     <script type="module" src="/src/main.tsx"></script>
   </head>
-<body class="min-h-screen py-8" style="background-image: url('public/Market_for_script.webp'); background-size: cover; background-position: center; background-attachment: fixed;">
+  <body>
     <div id="root"></div>
-
-    <script type="text/babel">
-        function TaskChecklist() {
-            const [tasks, setTasks] = React.useState(() => {
-                const savedTasks = localStorage.getItem('tasks');
-                return savedTasks ? JSON.parse(savedTasks) : [];
-            });
-            const [newTask, setNewTask] = React.useState('');
-            const [darkMode, setDarkMode] = React.useState(() => {
-                const savedMode = localStorage.getItem('darkMode');
-                return savedMode ? JSON.parse(savedMode) : false;
-            });
+  </body>
+</html>
 
             // Save tasks to localStorage whenever they change
             React.useEffect(() => {
