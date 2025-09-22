@@ -96,6 +96,15 @@ export default function TaskChecklist({ styles }: TaskChecklistProps) {
         >
           Add
         </button>
+        <button
+          onClick={() => {
+            setTasks([]);
+            localStorage.setItem('tasks', '[]');
+          }}
+          className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 focus:outline-none"
+        >
+          Clear All
+        </button>
       </div>
 
       <ul className="space-y-2">
