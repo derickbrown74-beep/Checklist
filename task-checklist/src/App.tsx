@@ -51,7 +51,15 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 py-8">
+    <div 
+      className="min-h-screen py-8"
+      style={{
+        backgroundImage: 'url("/Checklist/Market_for_script.webp")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}
+    >
       <div className="max-w-lg mx-auto px-4 relative">
         <div className="sticky top-0 z-10 flex justify-end items-center gap-2 mb-4 py-2">
           <button
