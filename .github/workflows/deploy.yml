@@ -30,11 +30,17 @@ jobs:
         working-directory: ./task-checklist
         run: |
           npm ci
+          echo "Node version:"
+          node --version
+          echo "NPM version:"
+          npm --version
+          echo "Installed packages:"
           npm list || true
 
       - name: Build
         working-directory: ./task-checklist
         run: |
+          export NODE_OPTIONS="--max-old-space-size=4096"
           npm run build || {
             echo "Build failed. Checking environment:"
             pwd
