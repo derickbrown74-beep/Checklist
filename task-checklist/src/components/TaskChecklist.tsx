@@ -58,8 +58,12 @@ export default function TaskChecklist() {
           onChange={(e) => setNewTask(e.target.value)}
           onKeyPress={(e) => e.key === 'Enter' && addTask()}
           placeholder="Add a new task..."
-          className="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500 bg-white text-black dark:text-black dark:bg-white !text-black placeholder:text-gray-500 dark:placeholder:text-gray-600"
-          style={{ color: 'black' }}
+          className="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500 bg-white text-black dark:text-black dark:bg-white font-medium text-base dark:font-semibold placeholder:text-gray-500 dark:placeholder:text-gray-600"
+          style={{ 
+            color: 'black',
+            fontWeight: '500',
+            textShadow: '0 0 0 #000'
+          }}
         />
         <button
           onClick={addTask}

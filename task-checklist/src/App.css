@@ -5,10 +5,15 @@
   text-align: center;
 }
 
-/* Force input text color */
+/* Force input text color and font settings */
 input[type="text"] {
   color: black !important;
   -webkit-text-fill-color: black !important;
+  font-weight: 500 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+  letter-spacing: 0.01em !important;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
 }
 
 .logo {
