@@ -48,8 +48,8 @@ export default function TaskChecklist() {
   }
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <h1 className="text-2xl font-bold mb-4 text-gray-800">Task Checklist</h1>
+    <div className="max-w-md mx-auto p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+      <h1 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Task Checklist</h1>
       
       <div className="flex gap-2 mb-4">
         <input
@@ -58,7 +58,7 @@ export default function TaskChecklist() {
           onChange={(e) => setNewTask(e.target.value)}
           onKeyPress={(e) => e.key === 'Enter' && addTask()}
           placeholder="Add a new task..."
-          className="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500 text-black dark:text-black bg-white dark:bg-white placeholder-gray-500 dark:placeholder-gray-600"
+          className="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500 text-black [&:not(:placeholder-shown)]:text-black dark:text-black bg-white dark:bg-white placeholder-gray-500 dark:placeholder-gray-600"
         />
         <button
           onClick={addTask}
@@ -72,16 +72,16 @@ export default function TaskChecklist() {
         {tasks.map(task => (
           <li
             key={task.id}
-            className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+            className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"
           >
             <div className="flex items-center gap-2">
               <input
                 type="checkbox"
                 checked={task.completed}
                 onChange={() => toggleTask(task.id)}
-                className="w-4 h-4 text-blue-500"
+                className="w-4 h-4 text-blue-500 dark:text-blue-400"
               />
-              <span className={task.completed ? 'line-through text-gray-500' : 'text-gray-800'}>
+              <span className={task.completed ? 'line-through text-gray-500 dark:text-gray-400' : 'text-gray-800 dark:text-white'}>
                 {task.text}
               </span>
             </div>
