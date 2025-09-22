@@ -71,7 +71,7 @@ export default function TaskChecklist({ styles }: TaskChecklistProps) {
   return (
     <div 
       style={{ backgroundColor: styles.mainBgColor }}
-      className="w-full p-6 rounded-lg shadow-lg bg-white/90 backdrop-blur-sm dark:bg-gray-800/90"
+      className="w-full p-6 rounded-lg shadow-xl bg-white/95 backdrop-blur-md dark:bg-gray-800/95"
     >
       <h1 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Task Checklist</h1>
       
