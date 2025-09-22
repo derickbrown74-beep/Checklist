@@ -35,9 +35,10 @@ function App() {
           {showEditor ? 'Hide Style Editor' : 'Show Style Editor'}
         </button>
         
-        {showEditor && <StyleEditor onStyleChange={(styles: StyleSettings) => {
+        {showEditor && <StyleEditor onStyleChange={(newStyles: StyleSettings) => {
           // The styles will be automatically saved to localStorage in the StyleEditor component
           // and retrieved by TaskChecklist
+          console.log('Styles updated:', newStyles);
         }} />}
         
         <TaskChecklist />
