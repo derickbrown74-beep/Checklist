@@ -1,8 +1,23 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import TaskChecklist from './components/TaskChecklist'
+import StyleEditor from './components/StyleEditor'
 import './App.css'
 
+interface StyleSettings {
+  inputTextColor: string;
+  inputBgColor: string;
+  inputFontFamily: string;
+  inputFontSize: string;
+  listTextColor: string;
+  listBgColor: string;
+  listFontFamily: string;
+  listFontSize: string;
+  mainBgColor: string;
+}
+
 function App() {
+  const [showEditor, setShowEditor] = useState(false);
+
   useEffect(() => {
     // Check user's preferred color scheme
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -12,7 +27,21 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 py-8">
-      <TaskChecklist />
+      <div className="max-w-4xl mx-auto px-4">
+        <button
+          onClick={() => setShowEditor(!showEditor)}
+          className="mb-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none"
+        >
+          {showEditor ? 'Hide Style Editor' : 'Show Style Editor'}
+        </button>
+        
+        {showEditor && <StyleEditor onStyleChange={(styles: StyleSettings) => {
+          // The styles will be automatically saved to localStorage in the StyleEditor component
+          // and retrieved by TaskChecklist
+        }} />}
+        
+        <TaskChecklist />
+      </div>
     </div>
   )
 }

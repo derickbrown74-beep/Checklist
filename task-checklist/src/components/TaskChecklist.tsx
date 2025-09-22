@@ -6,9 +6,32 @@ interface Task {
   completed: boolean
 }
 
+interface StyleSettings {
+  inputTextColor: string;
+  inputBgColor: string;
+  inputFontFamily: string;
+  inputFontSize: string;
+  listTextColor: string;
+  listBgColor: string;
+  listFontFamily: string;
+  listFontSize: string;
+  mainBgColor: string;
+}
+
 export default function TaskChecklist() {
   const [tasks, setTasks] = useState<Task[]>([])
   const [newTask, setNewTask] = useState('')
+  const [styles, setStyles] = useState<StyleSettings>({
+    inputTextColor: '#000000',
+    inputBgColor: '#ffffff',
+    inputFontFamily: 'system-ui, sans-serif',
+    inputFontSize: '16px',
+    listTextColor: '#000000',
+    listBgColor: '#f3f4f6',
+    listFontFamily: 'system-ui, sans-serif',
+    listFontSize: '16px',
+    mainBgColor: '#ffffff',
+  })
 
   // Load tasks from localStorage on component mount
   useEffect(() => {
@@ -48,7 +71,7 @@ export default function TaskChecklist() {
   }
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+    <div style={{ backgroundColor: styles.mainBgColor }} className="max-w-md mx-auto p-6 rounded-lg shadow-lg">
       <h1 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Task Checklist</h1>
       
       <div className="flex gap-2 mb-4">
@@ -58,11 +81,12 @@ export default function TaskChecklist() {
           onChange={(e) => setNewTask(e.target.value)}
           onKeyPress={(e) => e.key === 'Enter' && addTask()}
           placeholder="Add a new task..."
-          className="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500 bg-white text-black dark:text-black dark:bg-white font-medium text-base dark:font-semibold placeholder:text-gray-500 dark:placeholder:text-gray-600"
+          className="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
           style={{ 
-            color: 'black',
-            fontWeight: '500',
-            textShadow: '0 0 0 #000'
+            color: styles.inputTextColor,
+            backgroundColor: styles.inputBgColor,
+            fontFamily: styles.inputFontFamily,
+            fontSize: styles.inputFontSize
           }}
         />
         <button
@@ -77,16 +101,24 @@ export default function TaskChecklist() {
         {tasks.map(task => (
           <li
             key={task.id}
-            className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"
+            style={{ backgroundColor: styles.listBgColor }}
+            className="flex items-center justify-between p-3 rounded-lg"
           >
             <div className="flex items-center gap-2">
               <input
                 type="checkbox"
                 checked={task.completed}
                 onChange={() => toggleTask(task.id)}
-                className="w-4 h-4 text-blue-500 dark:text-blue-400"
+                className="w-4 h-4 text-blue-500"
               />
-              <span className={task.completed ? 'line-through text-gray-500 dark:text-gray-400' : 'text-gray-800 dark:text-white'}>
+              <span 
+                className={task.completed ? 'line-through' : ''}
+                style={{ 
+                  color: styles.listTextColor,
+                  fontFamily: styles.listFontFamily,
+                  fontSize: styles.listFontSize
+                }}
+              >
                 {task.text}
               </span>
             </div>
