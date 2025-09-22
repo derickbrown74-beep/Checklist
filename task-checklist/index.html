@@ -11,52 +11,6 @@
     <div id="root"></div>
   </body>
 </html>
-
-            // Save tasks to localStorage whenever they change
-            React.useEffect(() => {
-                localStorage.setItem('tasks', JSON.stringify(tasks));
-            }, [tasks]);
-
-            React.useEffect(() => {
-                localStorage.setItem('darkMode', JSON.stringify(darkMode));
-                document.documentElement.classList.toggle('dark', darkMode);
-            }, [darkMode]);
-
-            const addTask = () => {
-                if (newTask.trim()) {
-                    setTasks([
-                        ...tasks,
-                        {
-                            id: Date.now(),
-                            text: newTask.trim(),
-                            completed: false
-                        }
-                    ]);
-                    setNewTask('');
-                }
-            };
-
-            const toggleTask = (id) => {
-                setTasks(tasks.map(task =>
-                    task.id === id ? { ...task, completed: !task.completed } : task
-                ));
-            };
-
-            const deleteTask = (id) => {
-                setTasks(tasks.filter(task => task.id !== id));
-            };
-
-            return (
-                <div className={`max-w-md mx-auto p-6 rounded-lg shadow-lg ${darkMode ? 'bg-dark-bg text-white' : 'bg-white text-gray-800'}`}>
-                    <div className="flex justify-between items-center mb-4">
-                        <h1 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>Task Checklist</h1>
-                        <button
-                            onClick={() => setDarkMode(!darkMode)}
-                            className={`px-3 py-1 rounded-lg ${darkMode ? 'bg-gray-600 text-white' : 'bg-gray-200 text-gray-800'} hover:opacity-80`}
-                        >
-                            {darkMode ? '☀️ Light' : '🌙 Dark'}
-                        </button>
-                    </div>
                     
                     <div className="flex gap-2 mb-4">
                         <input
