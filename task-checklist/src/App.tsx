@@ -20,6 +20,23 @@ export default function App() {
   const [isDark, setIsDark] = useState(() => 
     document.documentElement.classList.contains('dark')
   );
+  const [styles, setStyles] = useState<StyleSettings>(() => {
+    const savedStyles = localStorage.getItem('styleSettings');
+    if (savedStyles) {
+      return JSON.parse(savedStyles);
+    }
+    return {
+      inputTextColor: '#000000',
+      inputBgColor: '#ffffff',
+      inputFontFamily: 'system-ui, sans-serif',
+      inputFontSize: '16px',
+      listTextColor: '#000000',
+      listBgColor: '#f3f4f6',
+      listFontFamily: 'system-ui, sans-serif',
+      listFontSize: '16px',
+      mainBgColor: '#ffffff',
+    };
+  });
 
   useEffect(() => {
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -43,7 +60,7 @@ export default function App() {
             title="Customize Appearance"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M4 9.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z M10 2c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8zm0 14c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z" />
+              <path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
             </svg>
           </button>
           <button
@@ -64,9 +81,9 @@ export default function App() {
         </div>
         <div className="flex flex-col gap-4">
           {showEditor && <StyleEditor onStyleChange={(newStyles: StyleSettings) => {
-            console.log('Styles updated:', newStyles);
+            setStyles(newStyles);
           }} />}
-          <TaskChecklist />
+          <TaskChecklist styles={styles} />
         </div>
       </div>
     </div>
