@@ -27,21 +27,23 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 py-8">
-      <div className="max-w-4xl mx-auto px-4">
-        <button
-          onClick={() => setShowEditor(!showEditor)}
-          className="mb-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none"
-        >
-          {showEditor ? 'Hide Style Editor' : 'Show Style Editor'}
-        </button>
-        
-        {showEditor && <StyleEditor onStyleChange={(newStyles: StyleSettings) => {
-          // The styles will be automatically saved to localStorage in the StyleEditor component
-          // and retrieved by TaskChecklist
-          console.log('Styles updated:', newStyles);
-        }} />}
-        
-        <TaskChecklist />
+      <div className="max-w-lg mx-auto px-4">
+        <div className="flex flex-col gap-4">
+          <button
+            onClick={() => setShowEditor(!showEditor)}
+            className="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none text-lg font-semibold"
+          >
+            {showEditor ? '✏️ Hide Style Editor' : '✏️ Customize Appearance'}
+          </button>
+          
+          {showEditor && <StyleEditor onStyleChange={(newStyles: StyleSettings) => {
+            // The styles will be automatically saved to localStorage in the StyleEditor component
+            // and retrieved by TaskChecklist
+            console.log('Styles updated:', newStyles);
+          }} />}
+          
+          <TaskChecklist />
+        </div>
       </div>
     </div>
   )

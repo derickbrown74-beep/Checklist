@@ -87,7 +87,7 @@ export default function TaskChecklist() {
   }
 
   return (
-    <div style={{ backgroundColor: styles.mainBgColor }} className="max-w-md mx-auto p-6 rounded-lg shadow-lg">
+    <div style={{ backgroundColor: styles.mainBgColor }} className="w-full p-6 rounded-lg shadow-lg">
       <h1 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Task Checklist</h1>
       
       <div className="flex gap-2 mb-4">
