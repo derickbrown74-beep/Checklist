@@ -97,23 +97,26 @@ export default function ProfileTabs({ styles }: ProfileTabsProps) {
           >
             <button
               onClick={() => setActiveProfile(profile.id)}
-              className={`px-4 py-2 rounded-lg ${
+              className={`px-4 py-2 rounded-lg flex items-center justify-between ${
                 activeProfile === profile.id
                 ? 'bg-blue-500 text-white'
                 : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
-              } ${isEditing ? 'pr-8' : ''}`}
+              }`}
             >
               {profile.name}
+              {isEditing && profiles.length > 1 && (
+                <span
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    deleteProfile(profile.id);
+                  }}
+                  className="ml-3 cursor-pointer text-red-500 hover:text-red-700 opacity-60 hover:opacity-100"
+                  title="Delete Profile"
+                >
+                  ×
+                </span>
+              )}
             </button>
-            {isEditing && profiles.length > 1 && (
-              <button
-                onClick={() => deleteProfile(profile.id)}
-                className="absolute right-2 text-red-500 hover:text-red-700"
-                title="Delete Profile"
-              >
-                ×
-              </button>
-            )}
           </div>
         ))}
         {!isAddingProfile ? (
