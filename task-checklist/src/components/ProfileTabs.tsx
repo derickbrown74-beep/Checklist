@@ -74,9 +74,22 @@ export default function ProfileTabs({ styles }: ProfileTabsProps) {
 
   const activeProfileData = profiles.find(p => p.id === activeProfile) || profiles[0];
 
+  const [isEditing, setIsEditing] = useState(false);
+
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap gap-2 items-center">
+        <button
+          onClick={() => setIsEditing(!isEditing)}
+          className={`px-4 py-2 rounded-lg ${
+            isEditing
+              ? 'bg-gray-600 text-white'
+              : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
+          }`}
+          title={isEditing ? "Done Editing" : "Edit Lists"}
+        >
+          {isEditing ? "Done" : "Edit Lists"}
+        </button>
         {profiles.map(profile => (
           <div
             key={profile.id}
@@ -88,14 +101,14 @@ export default function ProfileTabs({ styles }: ProfileTabsProps) {
                 activeProfile === profile.id
                 ? 'bg-blue-500 text-white'
                 : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
-              }`}
+              } ${isEditing ? 'pr-8' : ''}`}
             >
               {profile.name}
             </button>
-            {profiles.length > 1 && (
+            {isEditing && profiles.length > 1 && (
               <button
                 onClick={() => deleteProfile(profile.id)}
-                className="ml-2 text-red-500 hover:text-red-700"
+                className="absolute right-2 text-red-500 hover:text-red-700"
                 title="Delete Profile"
               >
                 ×
